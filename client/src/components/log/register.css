@@ -1,0 +1,21 @@
+
+form{
+    margin-bottom: 50px;
+    animation: fadeIn 300ms ease-out backwards;
+}
+
+@keyframes fadeIn {
+    from {
+      transform: translateX(-150px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }
+
+.error {
+    color: red;
+    font-size: 12px;
+}

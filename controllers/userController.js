@@ -15,7 +15,8 @@ const register = (req, res) => {
     User.findOne({email: req.body.email}).then((user) => {
         
         if(user){
-            return res.status(400).json({email: "A user is already register with this email"})
+            const error = "A user is already register with this email"
+            return res.status(200).send({error})
         }else {
             const newUser = new User({
                 userName: req.body.userName,
