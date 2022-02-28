@@ -52,6 +52,35 @@ try {
 }
 }
 
+const getSingleUser = async(req, res) => {
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+    try{
+        const user = await User.findById(req.params.id)
+        if (user) {
+           
+            
+            if(user._id.toString() === res.locals.user._id.toString()){
+                
+                
+                res.status(200).json({ user : user});
+
+               
+            }else {
+                logger.visitedUser(user, res.locals.user)
+                res.status(200).json({ user : user});
+                
+            }
+        } else {
+            res.status(500).json({ msg: "user not found" })
+        }
+    } catch (err) {
+        res.status(401).json({ error: err})
+    }
+    
+}
+
 
 //Delete User 
 const deleteUser = async(req, res) => {
@@ -136,6 +165,8 @@ const login = async(req,res) => {
 
 const logout = async(req,res) => {
 
+    console.log(res.locals.user.userName)
+    logger.userDisconnected(res.locals.user)
     res.cookie('jwt', '', { maxAge: 1 });                         
     res.redirect('/');
 }
@@ -149,6 +180,8 @@ module.exports = {
     deleteUser,
     updateUser,
     login,
-    logout
+    logout,
+    getSingleUser 
+
     
 }

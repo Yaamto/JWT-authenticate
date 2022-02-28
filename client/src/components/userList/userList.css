@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Roboto:wght@500&display=swap');
+
 .card{
     
     
@@ -10,10 +12,10 @@
 }
 
 .row:nth-child(even) {
-background-color: rgb(204, 204, 204);
+background-color: rgb(85, 85, 85);
 }
 .green{
-    background-color: green!important;
+    background-color: rgb(160, 128, 1)!important;
 }
 
 .card button {
@@ -50,10 +52,57 @@ background-color: rgb(204, 204, 204);
     display: none;
 }
 .not-possible{
-    color: rgb(65, 65, 65);
+    color: white;
     
     font-size: 25px;
-    transform: rotateZ(45deg);
-    margin:10px 13px ;
+   
+    margin:0px;
 }
+
+table {
+    font-family: 'Dosis', sans-serif;
+    
+    border: none;
+    border-radius: 10px;
+    border-spacing: 0;
+    text-align: center;
+    width:100%;
+    table-layout: fixed;
+    color: white
+}
+td{
+    padding: 20px;
+}
+tr{
+    transition: 00.3s;
+}
+
+
+th{
+    padding: 20px;
+    
+}
+tr:nth-child(even){
+    background-color: rgb(73, 73, 73);
+}
+
+tr:not(:first-child):hover{
+    background-color: rgb(175, 175, 175);
+    cursor: pointer;
+}
+
+
+.t-head{
+    background-color: rgb(255, 255, 255);
+    color:black;
+}
+.trash {
+    color : rgb(136, 3, 3);
+}
+
+.trash:hover {
+    cursor: pointer;
+}
+
+
 

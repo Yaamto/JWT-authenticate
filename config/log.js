@@ -33,7 +33,36 @@ const userConnected = (user) =>{
     })
 }
 
+const userDisconnected =(user)=> {
+    const content = "\n\n["+moment().format("DD/MM/YYYY, HH:mm:ss ")+"]"+" User : "+ user.userName + " disconnected"
+    fs.appendFile(path, content, err => {
+        if (err) {
+            console.error(err)
+            return
+        }else {
+            console.log("File written successfully\n");
+        }
+        //file written successfully
+    })
+}
+
+const visitedUser =(userVisited, currentUser) => {
+    const content = "\n\n["+moment().format("DD/MM/YYYY, HH:mm:ss ")+"]"+" User --"+ userVisited.userName + "-- visited by " + currentUser.userName
+            
+            fs.appendFile(path, content, err => {
+                if (err) {
+                    console.error(err)
+                    return
+                }else {
+                    console.log("File written successfully\n");
+                }
+                //file written successfully
+            })
+}
+
 module.exports = {
     deleteUserLog,
-    userConnected
+    userConnected,
+    userDisconnected,
+    visitedUser
 }

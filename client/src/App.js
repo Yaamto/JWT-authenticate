@@ -3,6 +3,7 @@ import Navbar from './components/navbar/Navbar';
 import NewProtectedRoute from './components/protectedRoute/NewProtectedRoute';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import Home from './page/Home';
+import Profile from './page/Profile';
 import Users from './page/Users';
 
 
@@ -32,7 +33,7 @@ function App() {
             element={
               <NewProtectedRoute>
                 <Navbar />
-                <Users />               
+                <Profile />               
               </NewProtectedRoute>
             }
         />

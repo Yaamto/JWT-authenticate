@@ -6,6 +6,7 @@ const router = express.Router();
 
 
 router.get('/allusers', userController.getAllUsers)
+router.get('/singleUser/:id', userController.getSingleUser)
 router.get('/logout', userController.logout)
 router.delete('/delete/:id', checkUser, userController.deleteUser)
 router.put('/update/:id', userController.updateUser)
