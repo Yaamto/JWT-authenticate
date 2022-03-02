@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {MdNotInterested} from "react-icons/md"
 import {BsTrash} from "react-icons/bs"
 import {Modal, Button} from 'react-bootstrap';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Spinner} from 'react-bootstrap'
 
 import "./userList.css"
 import ConfirmModal from './ConfirmModal';
@@ -10,14 +11,13 @@ import ConfirmModal from './ConfirmModal';
 const UserList = () => {
 
     const [usersList, setUsersList] = useState([])
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
     const [shownModalId, setShownModalId] = useState()
     const [userId, setUserId] = useState()
-  
+    const [loading, setLoading] =useState(false)
 
     const handleDelete = async( id, i) => {
-      
+      setLoading(false)
         const res = await fetch('http://localhost:3000/user/delete/'+id, {
             method:"delete",
             headers: {
@@ -30,14 +30,14 @@ const UserList = () => {
             const newUsersList = [...usersList]   
             newUsersList.splice(i, 1)   
             setUsersList(newUsersList)
-            
+            setTimeout(() => setLoading(true),100)
         
     }
 
   
 
      useEffect(() => {
-        setLoading(true);
+       
         const getUsers = async() => {
             
         const res = await fetch('http://localhost:3000/user/allusers', {
@@ -47,7 +47,8 @@ const UserList = () => {
             credentials: 'include'
           })
           const data = await res.json()
-          setUserId(localStorage.getItem("id"));
+          setTimeout(() => setLoading(true),200)
+          setUserId(localStorage.getItem("id"))
           setUsersList(data.users)
           
         }
@@ -64,8 +65,8 @@ const UserList = () => {
         
         
     }, [])
-    if (loading) {
-        return <p>Data is loading...</p>;
+    if (loading === false) {
+        return <div className="text-center align-middle"><Spinner animation="border" variant="warning" /></div>
       }
 
       if (error || !Array.isArray(usersList)) {

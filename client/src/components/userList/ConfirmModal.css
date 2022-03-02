@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Roboto:wght@500&display=swap');
 .Modal{
     position:absolute;
-    top:35%;
+    top:25%;
     left:40%;
     animation : topslider 0.3s ease-in-out;
     background-color: white;
@@ -10,6 +10,8 @@
     font-family: 'Dosis', sans-serif;
     border: none;
   font-size: 20px;
+  width: auto!important;
+  height: auto!important;
 
 }
 .Modal:focus{

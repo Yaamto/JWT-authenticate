@@ -26,7 +26,7 @@ const ConfirmModal = ({showModal, onConfirm, onClose, nameUser}) => {
                 <Modal.Header >
                     <Modal.Title className='modal-title'>Confirmation</Modal.Title>
                 </Modal.Header>
-                <hr />
+              
                 <Modal.Body className='modal-body'>Voulez-vous supprimer l'utilisateur "{userToDelete}" ?</Modal.Body>
                 <Modal.Footer>
                     <button className='btn-Modal' onClick={handleClose}>

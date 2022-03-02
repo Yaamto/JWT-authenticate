@@ -14,7 +14,7 @@ const Banned = ({ban, onClose}) => {
                 <Modal.Header >
                     <Modal.Title className='modal-banned-title'> <span className='attention'><BsExclamationOctagonFill /></span> Avertissement</Modal.Title>
                 </Modal.Header>
-                <hr />
+           
                 <Modal.Body className='modal-banned-body'> Votre compte est banni ! Vous ne pouvez pas vous connecter à votre compte.</Modal.Body>
                 <Modal.Footer>
                     <button className='btn-Modal' onClick={handleClose}>

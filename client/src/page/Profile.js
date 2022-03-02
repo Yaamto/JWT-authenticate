@@ -1,11 +1,15 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useEffect, useState } from 'react';
 import {CgProfile} from "react-icons/cg"
+import {Spinner} from 'react-bootstrap'
 import "./profile.css"
+
+
 
 const Profile = () => {
 
     const [singleUser, setSingleUser] = useState([])
-
+    const [loading, setLoading] = useState(false)
   
     
     useEffect(() => {
@@ -20,7 +24,8 @@ const Profile = () => {
           })
           const data = await res.json()
           setSingleUser(data.user)
-          
+          setTimeout(() =>  setLoading(true), 200)
+         
           console.log(data.user)
           
         }
@@ -28,14 +33,18 @@ const Profile = () => {
         getCurrentUser(id)
     }, [])
 
-    
+    if (loading === false){
+
+      return <div className="text-center align-middle"> <Spinner animation="border" variant="warning" /> </div>
+
+    }
      return (
         <div>
             
             <div className="main">
                 <div className="icon-profile">
                 <CgProfile />
-               
+                
 
 
             </div>
