@@ -1,0 +1,29 @@
+.Modal-banned{
+    position:absolute;
+    top:35%;
+    left:36%;
+    animation : topslider 0.3s ease-in-out;
+    background-color: rgb(199, 199, 199);
+    border-radius: 5px;
+    padding:40px;
+    font-family: 'Dosis', sans-serif;
+    border: none;
+  font-size: 20px;
+  width: 450px;
+  text-align: center;
+
+}
+.modal-banned-title{
+    font-size: 25px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    line-height: normal;
+}
+.modal-banned-body{
+    margin-top: 50px;
+}
+.attention{
+    color: red;
+    margin-right: 25px;
+    font-size: 30px;
+}

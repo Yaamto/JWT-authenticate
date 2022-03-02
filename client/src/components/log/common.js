@@ -24,8 +24,8 @@ const Common = () => {
     
     return (
         
-        <div>
-            <div className="container">
+        <div className='main-container'>
+            <div className="container-log">
                 <h2>Authentification</h2>
                 <div className="logOrRegi">
                     <button onClick={handleLogin} className={`btn login-btn ${login ? "active" :"" }`}>Login</button>

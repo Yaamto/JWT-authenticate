@@ -2,12 +2,14 @@ import React, { useState} from 'react';
 import { useNavigate} from "react-router-dom";
 import axios from 'axios'
 import "./login.css"
+import Banned from './banned.js/Banned';
 
 const Login = () => {
 
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+    const [banned, setBanned] = useState(false)
     const navigate = useNavigate()
     const handleLogin = (e) => {
        
@@ -28,7 +30,14 @@ const Login = () => {
         })
         .then((res) => {
             console.log(res)
-            navigate("/all-users")
+            if(res.data.banned){
+                console.log("test")
+                setBanned(true)
+                
+            }else {
+                navigate("/all-users")
+            }
+           
         })
 
         .catch((err) => {
@@ -36,11 +45,13 @@ const Login = () => {
         })
 
     }
+
+    
     return (
         
         <div>
-           
-         
+           <Banned ban={banned} onClose={() => setBanned(!banned)}/>
+         {console.log(banned)}
             <form onSubmit={handleLogin}>
   
 		<div className='field'>

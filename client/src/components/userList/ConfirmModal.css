@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@500&family=Roboto:wght@500&display=swap');
+.Modal{
+    position:absolute;
+    top:35%;
+    left:40%;
+    animation : topslider 0.3s ease-in-out;
+    background-color: white;
+    border-radius: 5px;
+    padding:40px;
+    font-family: 'Dosis', sans-serif;
+    border: none;
+  font-size: 20px;
+
+}
+.Modal:focus{
+ outline: none;
+}
+
+.btn-Modal{
+  font-family: 'Dosis', sans-serif;
+  background-image: linear-gradient(to right bottom, #000000, #101010, #1a1a1a, #242424, #2e2e2e);
+  padding: 5px 30px;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  margin: 40px 10px 10px 10px;
+  font-size: 17px;
+  transition: 0.3s;
+
+ 
+}
+.btn-Modal:hover{
+  cursor: pointer;
+  transform: scale(0.97);
+
+
+ 
+  
+}
+
+.modal-title{
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.modal-body{
+  margin-top: 50px;
+
+}
+
+
+@keyframes topslider {
+
+    from {
+        transform: translateY(-150px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0px);
+        opacity: 1;
+      }
+
+}

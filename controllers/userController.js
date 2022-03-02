@@ -61,17 +61,17 @@ const getSingleUser = async(req, res) => {
         if (user) {
            
             
-            if(user._id.toString() === res.locals.user._id.toString()){
-                
-                
-                res.status(200).json({ user : user});
+                if(user._id.toString() === res.locals.user._id.toString()){
+                    
+                    
+                    res.status(200).json({ user : user});
 
-               
-            }else {
-                logger.visitedUser(user, res.locals.user)
-                res.status(200).json({ user : user});
                 
-            }
+                }else {
+                    logger.visitedUser(user, res.locals.user)
+                    res.status(200).json({ user : user});
+                    
+                }
         } else {
             res.status(500).json({ msg: "user not found" })
         }
@@ -146,18 +146,23 @@ const login = async(req,res) => {
     const { email, password } = req.body
     try {
         
+
         const user = await User.login(email, password);
-        
+       
+        if(user.banned === false){
+          
         const token = createToken(user._id);
        
         res.cookie('jwt', token, { httpOnly: true, maxAge});
         logger.userConnected(user)
         res.status(200).json({ user: user._id, token : token})
 
-        
+    }else {
+       res.status(200).send({banned: true})
+    }
       }
       catch(err) {
-        res.status(400).json({ error : "erreur" });
+        res.status(400).json({ error : "erreur rr" });
       }
 
 

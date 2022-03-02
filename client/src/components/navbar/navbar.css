@@ -12,7 +12,7 @@
     
 }
 
-.Navigation a,button {
+.Navigation a  {
    
     text-decoration: none;
     color:black;
@@ -27,11 +27,12 @@
   border: none;
    font-size: 20px;
    transition: 0.3s ease-out;
-   
+   margin-left: 40px;
+   padding: 5px 30px;
 }
 .Navigation button:hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(0.95);
 }
 .Navigation a:hover {
     background-color: rgb(34, 34, 34);

@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import {MdNotInterested} from "react-icons/md"
 import {BsTrash} from "react-icons/bs"
-
+import {Modal, Button} from 'react-bootstrap';
 
 
 import "./userList.css"
+import ConfirmModal from './ConfirmModal';
 
 const UserList = () => {
 
     const [usersList, setUsersList] = useState([])
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState();
-    
-    
-
+    const [shownModalId, setShownModalId] = useState()
+    const [userId, setUserId] = useState()
   
 
-    const handleDelete = async(e, id, i) => {
-      e.preventDefault()
+    const handleDelete = async( id, i) => {
+      
         const res = await fetch('http://localhost:3000/user/delete/'+id, {
             method:"delete",
             headers: {
@@ -34,6 +34,7 @@ const UserList = () => {
         
     }
 
+  
 
      useEffect(() => {
         setLoading(true);
@@ -46,6 +47,7 @@ const UserList = () => {
             credentials: 'include'
           })
           const data = await res.json()
+          setUserId(localStorage.getItem("id"));
           setUsersList(data.users)
           
         }
@@ -75,7 +77,7 @@ const UserList = () => {
     return (
         <div>
          
-         
+
            <table>
     <thead className="tbl-header">
         <tr className='t-head'>
@@ -88,42 +90,46 @@ const UserList = () => {
     <tbody>
                 {usersList.map((user, i) => {
                     const date = new Date(user.date)
-                    const id = localStorage.getItem("id")
+                    
                     let test= false
-                    if(user._id=== id){
+                    if(user._id=== userId){
                      test=true
                       } else ( 
                         test=false
                       )
                    return( 
+                   
                      
-                    //  <div className={`row ${test ? "green" :"" }`}  key ={i}>
-                    // <p>{user.userName}</p>
-                    
-                    // <p>{user.email}</p>
-                    // <p>{date.toLocaleDateString("fr")}</p>
-                    // <button className={`${test ? "hide" :"" }`} onClick={(e) => handleDelete(e, user._id, i)}>X</button>
-                    // <p className={`not-possible ${test ? "" :"hide" }`} ><RiForbid2Fill /></p>
-                    // </div>
+                     
                     
                      <tr className={` ${test ? "green" :"" }`}  key ={i}>
                        <td>{user.userName}</td>
                        <td>{user.email}</td>
                        <td>{date.toLocaleDateString("fr")}</td>
                        <td>
-                         <span className={`trash ${test ? "hide" :"" }`} onClick={(e) => handleDelete(e, user._id, i)}><BsTrash /></span>
+                         <span className={`trash ${test ? "hide" :"" }`} onClick={() => {setShownModalId(i)}}
+                           
+                          
+                           
+                        ><BsTrash /></span>
+                         
+                         <ConfirmModal showModal={shownModalId === i} onConfirm={() => {
+                           setShownModalId(null)
+                           handleDelete(user._id, i)
+                           
+                         } } onClose={() => setShownModalId(null)} nameUser={user.userName}/>
                          <p className={`not-possible ${test ? "" :"hide" }`} ><MdNotInterested /></p>
                          </td>
                       
                      </tr>
+                    //  (e) => handleDelete(e, user._id, i)
                 )
 })}
 </tbody>
+
 </table>
 </div>
-
-
-            
+ 
       
     );
 };
