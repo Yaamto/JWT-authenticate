@@ -4,12 +4,14 @@ import axios from 'axios'
 import "./login.css"
 import Banned from './banned.js/Banned';
 
+
 const Login = () => {
 
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [banned, setBanned] = useState(false)
+    const [user, setUser] = useState()
     const navigate = useNavigate()
     const handleLogin = (e) => {
        
@@ -33,6 +35,7 @@ const Login = () => {
             if(res.data.banned){
                 console.log("test")
                 setBanned(true)
+                setUser(res.data.user)
                 
             }else {
                 navigate("/all-users")
@@ -50,7 +53,7 @@ const Login = () => {
     return (
         
         <div>
-           <Banned ban={banned} onClose={() => setBanned(!banned)}/>
+           <Banned ban={banned} onClose={() => setBanned(!banned)} user={user}/>
          {console.log(banned)}
             <form onSubmit={handleLogin}>
   

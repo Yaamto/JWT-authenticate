@@ -60,9 +60,24 @@ const visitedUser =(userVisited, currentUser) => {
             })
 }
 
+const userEditedBy = (userEdited, currentUser) => {
+    const content = "\n\n["+moment().format("DD/MM/YYYY, HH:mm:ss ")+"]"+" User --"+ userEdited.userName + "-- edited by " + currentUser.userName
+    fs.appendFile(path, content, err => {
+        if (err) {
+            console.error(err)
+            return
+        }else {
+            console.log("File written successfully\n");
+        }
+        //file written successfully
+    })
+
+}
+
 module.exports = {
     deleteUserLog,
     userConnected,
     userDisconnected,
-    visitedUser
+    visitedUser,
+    userEditedBy
 }

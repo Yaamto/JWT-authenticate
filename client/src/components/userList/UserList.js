@@ -4,9 +4,11 @@ import {BsTrash} from "react-icons/bs"
 import {Modal, Button} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Spinner} from 'react-bootstrap'
-
+import { Link } from 'react-router-dom';
 import "./userList.css"
 import ConfirmModal from './ConfirmModal';
+import SearchBar from '../searchbar/SearchBar';
+import {BsFillPencilFill} from "react-icons/bs"
 
 const UserList = () => {
 
@@ -15,9 +17,11 @@ const UserList = () => {
     const [shownModalId, setShownModalId] = useState()
     const [userId, setUserId] = useState()
     const [loading, setLoading] =useState(false)
+    const [query, setQuery] = useState("")
+
 
     const handleDelete = async( id, i) => {
-      setLoading(false)
+    
         const res = await fetch('http://localhost:3000/user/delete/'+id, {
             method:"delete",
             headers: {
@@ -30,7 +34,36 @@ const UserList = () => {
             const newUsersList = [...usersList]   
             newUsersList.splice(i, 1)   
             setUsersList(newUsersList)
-            setTimeout(() => setLoading(true),100)
+            
+        
+    }
+
+    const handleBan = async(e, id, i) => {
+      e.preventDefault()
+      const res = await fetch('http://localhost:3000/user/ban/'+id, {
+        method:"get",
+        headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        })
+        const data = await res.json()
+        console.log(data)
+        
+    }
+
+    const handleUnBan = async(e, id, i) => {
+      e.preventDefault()
+      const res = await fetch('http://localhost:3000/user/unban/'+id, {
+        method:"get",
+        headers: {
+            'Content-Type': 'application/json'
+          },
+          credentials: 'include'
+        })
+        const data = await res.json()
+        console.log(data)
+     
         
     }
 
@@ -77,7 +110,8 @@ const UserList = () => {
     
     return (
         <div>
-         
+            <input type="text" placeholder='Search...' onChange={(e) => setQuery(e.target.value)} class="searchbar"/>
+        
 
            <table>
     <thead className="tbl-header">
@@ -86,28 +120,39 @@ const UserList = () => {
             <th>mail</th>
             <th>date</th>
             <th>action</th>
+            <th>status</th>
         </tr>
     </thead>
     <tbody>
-                {usersList.map((user, i) => {
+                {usersList.filter((user) => user.userName.toLowerCase().includes(query)).map((user, i) => {
                     const date = new Date(user.date)
                     
                     let test= false
+                    
                     if(user._id=== userId){
                      test=true
                       } else ( 
                         test=false
                       )
+
+                     
                    return( 
                    
                      
                      
                     
                      <tr className={` ${test ? "green" :"" }`}  key ={i}>
-                       <td>{user.userName}</td>
+                     
+                       <td>{user.userName} </td>
                        <td>{user.email}</td>
                        <td>{date.toLocaleDateString("fr")}</td>
                        <td>
+                         <Link to={{
+                         pathname: `/user/${user._id}`,
+
+                       }}
+                         key={user._id}
+                       ><BsFillPencilFill className={`edit-user ${test ? "hide" :"" }`}/></Link>
                          <span className={`trash ${test ? "hide" :"" }`} onClick={() => {setShownModalId(i)}}
                            
                           
@@ -121,6 +166,9 @@ const UserList = () => {
                          } } onClose={() => setShownModalId(null)} nameUser={user.userName}/>
                          <p className={`not-possible ${test ? "" :"hide" }`} ><MdNotInterested /></p>
                          </td>
+                          <td>
+                            {user.banned ? "banned": "unban"}
+                          </td>
                       
                      </tr>
                     //  (e) => handleDelete(e, user._id, i)

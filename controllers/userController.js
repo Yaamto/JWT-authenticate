@@ -109,27 +109,35 @@ const deleteUser = async(req, res) => {
     
 }
 
-const updateUser = (req, res) => {
+const updateUser = async(req, res) => {
     if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
+    const userEdited = await User.findById(req.params.id)
+    
+    const currentUser = res.locals.user
+    console.log( "voili :" + userEdited + "" + currentUser)
     const user = {
         userName : req.body.userName,           
         email : req.body.email,
+        banned: req.body.banned
         
     }
 
-    try {
 
-        User.findOneAndUpdate(req.params.id, 
+
+        User.findByIdAndUpdate(req.params.id, 
             {$set : user},
-            {$new: true, upsert: true, setDefaultsOnInsert: true })
-            .then((data) =>res.send(data))
-            .catch((err)=> res.status(500).send(err))
-    }catch(err){
-        return res.status(500).json({ message: err });
-    }
-}
+            {new : true},
+            (err, docs) =>{
+                if(!err) {
+                logger.userEditedBy(userEdited, currentUser)
+                res.json(docs)
+                }
+                else console.log("update err :" + err)
+     
+            })
+        }
 const maxAge = 3 * 24 * 60 * 60 * 1000;
 
 const createToken = (id) => {
@@ -158,7 +166,7 @@ const login = async(req,res) => {
         res.status(200).json({ user: user._id, token : token})
 
     }else {
-       res.status(200).send({banned: true})
+       res.status(200).send({banned: true, user: user.userName})
     }
       }
       catch(err) {
@@ -176,6 +184,54 @@ const logout = async(req,res) => {
     res.redirect('/');
 }
 
+const banUser = async(req,res) => {
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+
+    const data = {
+        banned : true,           
+        
+     }
+    try {
+        
+   
+        User.findByIdAndUpdate(req.params.id,
+            {$set : data},
+            {$new: true, upsert: true, setDefaultsOnInsert: true })
+            .then((data) =>res.send(data))
+            .catch((err)=> res.status(500).send(err))
+       
+    }
+    catch(err) {
+        res.status(400).json({error : err})
+    }
+}
+
+const unbanUser = async(req,res) => {
+    if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send("ID unknown : " + req.params.id);
+
+
+    const data = {
+        banned : false,           
+        
+     }
+    try {
+        
+   
+        User.findByIdAndUpdate(req.params.id,
+            {$set : data},
+            {$new: true, upsert: true, setDefaultsOnInsert: true })
+            .then((data) =>res.send(data))
+            .catch((err)=> res.status(500).send(err))
+       
+    }
+    catch(err) {
+        res.status(400).json({error : err})
+    }
+}
+
 
 module.exports = {
 
@@ -186,7 +242,9 @@ module.exports = {
     updateUser,
     login,
     logout,
-    getSingleUser 
+    getSingleUser,
+    banUser,
+    unbanUser
 
     
 }

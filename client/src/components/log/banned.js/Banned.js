@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import "./banned.css"
 import {BsExclamationOctagonFill} from "react-icons/bs"
-const Banned = ({ban, onClose}) => {
+const Banned = ({ban, onClose, user}) => {
    
     const handleClose = () => {
         onClose()
@@ -15,7 +15,7 @@ const Banned = ({ban, onClose}) => {
                     <Modal.Title className='modal-banned-title'> <span className='attention'><BsExclamationOctagonFill /></span> Avertissement</Modal.Title>
                 </Modal.Header>
            
-                <Modal.Body className='modal-banned-body'> Votre compte est banni ! Vous ne pouvez pas vous connecter à votre compte.</Modal.Body>
+                <Modal.Body className='modal-banned-body'> {user}, votre compte à été banni ! Vous ne pouvez pas vous connecter à votre compte.</Modal.Body>
                 <Modal.Footer>
                     <button className='btn-Modal' onClick={handleClose}>
                         Fermer

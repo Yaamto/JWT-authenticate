@@ -50,7 +50,7 @@ margin-left: 35px;
 .logOrRegi button:hover{
     cursor: pointer;
     
-    
+    color:white;
     background-color: rgb(145, 145, 145);
     
 }
@@ -87,10 +87,9 @@ margin-left: 35px;
     margin-top: 10px;
     font-family: 'Roboto', sans-serif;
 }
-.inp:focus{
-    outline: none;
+
+.btn-check:focus+.btn, .btn:focus {
+    box-shadow: none!important;
 }
-
-
 
 

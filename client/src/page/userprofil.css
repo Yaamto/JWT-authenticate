@@ -1,0 +1,30 @@
+.profil-items{
+    list-style: none;
+    color: white;
+}
+
+.profil-items li {
+    padding: 15px;
+    
+   
+    
+}
+
+.profil-items li input,select, span{
+ margin-left: 50px;
+}
+
+.user-profil{
+    animation: topslider 300ms ease-out backwards;
+}
+
+@keyframes topslider {
+    from {
+      transform: translateY(-150px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }

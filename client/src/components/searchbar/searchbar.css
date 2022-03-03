@@ -1,0 +1,27 @@
+
+.search{
+    margin-bottom: 30px;
+  
+   display: flex;
+   flex-direction: column;
+   width: 200px;
+   align-items: center;
+   margin-left: 40%;
+}
+.searchbar{
+    width: 200px;
+   
+   
+}
+.searchbar:focus{
+    outline: none;
+}
+.list-items{
+    background-color: white;
+    width: 200px;
+    
+}
+.search-item {
+    margin-bottom: 0;
+    margin-top: 5px;
+}

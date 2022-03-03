@@ -4,6 +4,7 @@ import NewProtectedRoute from './components/protectedRoute/NewProtectedRoute';
 
 import Home from './page/Home';
 import Profile from './page/Profile';
+import UserProfil from './page/UserProfil';
 import Users from './page/Users';
 
 
@@ -21,6 +22,15 @@ function App() {
 
 
           </Route>
+          <Route path="/user/:id"
+            element={
+              <NewProtectedRoute>
+                <Navbar />
+                 <UserProfil />             
+              </NewProtectedRoute>
+            }
+        />
+
           <Route path="/all-users"
             element={
               <NewProtectedRoute>

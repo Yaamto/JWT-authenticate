@@ -68,13 +68,14 @@ table {
     text-align: center;
     width:100%;
     table-layout: fixed;
-    color: white
+    color: rgb(255, 255, 255)
 }
 td{
     padding: 20px;
 }
 tr{
     transition: 00.3s;
+    background-color: rgb(119, 119, 119);
 }
 
 
@@ -86,7 +87,7 @@ tr:nth-child(even){
     background-color: rgb(73, 73, 73);
 }
 
-tr:not(:first-child):hover{
+tr:hover{
     background-color: rgb(175, 175, 175);
     cursor: pointer;
 }
@@ -96,6 +97,9 @@ tr:not(:first-child):hover{
     background-color: rgb(255, 255, 255);
     color:black;
 }
+.t-head:hover{
+    background-color: rgb(255, 255, 255);
+}
 .trash {
     color : rgb(136, 3, 3);
     font-size: 23px;
@@ -104,7 +108,13 @@ tr:not(:first-child):hover{
 
 .trash:hover {
     cursor: pointer;
+    
 }
 
-
+.edit-user{
+    font-size: 20px;
+    margin-bottom: 7px;
+    margin-right: 5px;
+    color:rgb(94, 255, 0)
+}
 
