@@ -17,7 +17,7 @@ const checkUser = async(req, res, next) => {
         return res.send('token not available or expired')
       } else {
 
-        let user = await User.findById(decodedToken.id);
+        let user = await User.findById(decodedToken.id).select("-password");
         res.locals.user = user;
         if (res.locals.user) {
 

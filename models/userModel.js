@@ -26,7 +26,11 @@ default: Date.now,
 banned: {
   type:Boolean,
   default: false
-}
+},
+isAdmin: {
+  type: Boolean,
+  default: false,
+},
 })
 
 UserSchema.pre("save", async function(next) {

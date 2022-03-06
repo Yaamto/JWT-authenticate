@@ -50,6 +50,9 @@ const Navbar = () => {
             <NavLink exact to="/profile" >
                 Profil
             </NavLink>
+            <NavLink exact to="/chat" >
+                Chat
+            </NavLink>
             <button onClick={handleLogout}><FiLogOut /></button>
           
         </div>

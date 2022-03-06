@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Navbar from './components/navbar/Navbar';
 import NewProtectedRoute from './components/protectedRoute/NewProtectedRoute';
+import ChatPage from './page/ChatPage';
 
 import Home from './page/Home';
 import Profile from './page/Profile';
@@ -44,6 +45,14 @@ function App() {
               <NewProtectedRoute>
                 <Navbar />
                 <Profile />               
+              </NewProtectedRoute>
+            }
+        />
+         <Route path="/chat"
+            element={
+              <NewProtectedRoute>
+                <Navbar />
+                <ChatPage />               
               </NewProtectedRoute>
             }
         />

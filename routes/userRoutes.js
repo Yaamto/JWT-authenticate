@@ -18,4 +18,6 @@ router.post('/login', userController.login)
 router.get("/ban/:id", userController.banUser)
 router.get("/unban/:id", userController.unbanUser)
 
+
+
 module.exports = router

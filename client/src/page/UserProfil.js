@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Select from 'react-select';
+
 import "./userprofil.css"
+import {Spinner} from 'react-bootstrap'
 const UserProfil = () => {
     const [singleUser, setSingleUser] = useState([]);
     const [userName, setUserName] = useState()
@@ -10,10 +11,9 @@ const UserProfil = () => {
     const {id} = useParams()
     const date = new Date(singleUser.date)
     const navigate = useNavigate()
-    
+    const [loading, setLoading] =useState(false)
 
-    console.log(banned)
-    console.log(singleUser._id)
+  
     useEffect(() => {
         
         const getCurrentUser = async(id) => {
@@ -27,15 +27,20 @@ const UserProfil = () => {
           const data = await res.json()
           setSingleUser(data.user)
           
+
+          setBanned(data.user.banned)
+          setTimeout(() => setLoading(true),200)
          
-          console.log(data.user)
+          
+          
           
         }
 
         getCurrentUser(id)
+        
     }, [])
 
-
+    
     const updateUser = async(id, userEdited) => {
         const res = await fetch('http://localhost:3000/user/update/'+id, {
             method:"put",
@@ -47,42 +52,53 @@ const UserProfil = () => {
             })
             
             const datas = await res.json()
-            console.log(datas)
+            
+            navigate("/all-users")
             
     }
 
     const handleRedirect = () => {
         navigate("/all-users")
     }
+
+    if (loading === false){
+
+        return <div className="text-center align-middle"> <Spinner animation="border" variant="warning" /> </div>
+  
+      }
+
+  
     return (
         <div className='user-profil'>
           <ul className='profil-items'>
               <li>
                   <label htmlFor="userName">Username :</label>
-                  <input type="text" id="userName" name='userName' defaultValue={singleUser.userName} onChange={(e) => setUserName(e.target.value)}/>
+                  <input className='input-profil' type="text" id="userName" name='userName' defaultValue={singleUser.userName} onChange={(e) => setUserName(e.target.value)}/>
               </li>
               <li>
                   <label htmlFor="email">email : </label>
-                  <input type="text" id="email" name='email' defaultValue={singleUser.email} onChange={(e) => setEmail(e.target.value)}/>
+                  <input className='input-profil' type="text" id="email" name='email' defaultValue={singleUser.email} onChange={(e) => setEmail(e.target.value)}/>
               </li>
               <li>
                   <label htmlFor="date">Created at : </label>
-                  <span htmlFor="">{date.toLocaleDateString("fr")}</span>
+                <span htmlFor="">{date.toLocaleDateString("fr")}</span>
                   
               </li>
               <li>
                   <label htmlFor="">Ban :</label>
-                  <label htmlFor="banned">Oui</label>
-                  <input type="radio" name="ban" id="banned" value="true" onChange={(e) => setBanned(e.target.value)}/>
-                  <label htmlFor="banned">Non</label>
-                  <input type="radio" name="ban" id="unbanned" value="false"   onChange={(e) => setBanned(e.target.value)} />
+                  <input className='input-ban' type="radio" name="ban" id="banned" value="true" defaultChecked={singleUser.banned} onChange={(e) => setBanned(e.target.value)}/>
+                  <label className='label-ban' htmlFor="banned">ban</label>
+                  <input className='input-ban' type="radio" name="ban" id="unbanned" value="false"  defaultChecked={!singleUser.banned} onChange={(e) => setBanned(e.target.value)} />
+                  <label className='label-ban' htmlFor="unbanned">unban</label>
+                 
                     
 
               </li>
           </ul>
-
-          <button onClick={(e) => updateUser(singleUser._id,{userName: userName, email: email, banned: banned})}>Save</button>
-        <button onClick={handleRedirect}>Back</button> 
+            <div className="button-sect">
+          <button className='btn-profil' onClick={(e) => updateUser(singleUser._id,{userName: userName, email: email, banned: banned})}>Save</button>
+        <button className='btn-profil' onClick={handleRedirect}>Back</button> 
+        </div>
         </div>
     );
 };

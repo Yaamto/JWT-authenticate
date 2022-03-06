@@ -17,9 +17,10 @@ const NewProtectedRoute = ({children}) => {
       })
       const data = await res.json()
       
-      if (data.id) {
+      if (data.user._id) {
         setIsAuth(true)
-        localStorage.setItem("id", data.id )
+        localStorage.setItem("id", data.user._id )
+        localStorage.setItem("userInfo", data.user)
       } else {
         setIsAuth(false)
        

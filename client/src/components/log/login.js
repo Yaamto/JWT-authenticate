@@ -37,6 +37,7 @@ const Login = () => {
                 setBanned(true)
                 setUser(res.data.user)
                 
+                
             }else {
                 navigate("/all-users")
             }

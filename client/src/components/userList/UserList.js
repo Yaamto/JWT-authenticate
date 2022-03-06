@@ -9,6 +9,7 @@ import "./userList.css"
 import ConfirmModal from './ConfirmModal';
 import SearchBar from '../searchbar/SearchBar';
 import {BsFillPencilFill} from "react-icons/bs"
+import {AiOutlineSearch} from "react-icons/ai"
 
 const UserList = () => {
 
@@ -110,9 +111,10 @@ const UserList = () => {
     
     return (
         <div>
+          <div className="search-sec">
             <input type="text" placeholder='Search...' onChange={(e) => setQuery(e.target.value)} class="searchbar"/>
-        
-
+            <span className='loupe'><AiOutlineSearch /></span>
+            </div>
            <table>
     <thead className="tbl-header">
         <tr className='t-head'>
@@ -167,7 +169,7 @@ const UserList = () => {
                          <p className={`not-possible ${test ? "" :"hide" }`} ><MdNotInterested /></p>
                          </td>
                           <td>
-                            {user.banned ? "banned": "unban"}
+                            {user.banned ? "banned": "unbanned"}
                           </td>
                       
                      </tr>

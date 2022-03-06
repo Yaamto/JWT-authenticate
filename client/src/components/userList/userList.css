@@ -71,7 +71,7 @@ table {
     color: rgb(255, 255, 255)
 }
 td{
-    padding: 20px;
+    padding: 12px;
 }
 tr{
     transition: 00.3s;
@@ -104,6 +104,7 @@ tr:hover{
     color : rgb(136, 3, 3);
     font-size: 23px;
     padding: 10px;
+    margin-left: 10px;
 }
 
 .trash:hover {
@@ -118,3 +119,29 @@ tr:hover{
     color:rgb(94, 255, 0)
 }
 
+/* search sec */
+
+.search-sec{
+    position: relative;
+   
+
+}
+.loupe{
+    position: absolute;
+    left:220px;
+    font-size: 20px;
+    animation: popbyright 300ms ease-out backwards;
+}
+.searchbar:focus + span {
+    display: none;
+}
+@keyframes popbyright {
+    from {
+      transform: translateX(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0px);
+      opacity: 1;
+    }
+  }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {AiOutlineSearch} from "react-icons/ai"
 import "./searchbar.css"
 
 const SearchBar = ({users}) => {
@@ -9,6 +10,9 @@ const SearchBar = ({users}) => {
     return (
         <div className='search text-center'>
             <input type="text" placeholder='Search...' onChange={(e) => setQuery(e.target.value)} class="searchbar"/>
+            <div className='test'>
+            <AiOutlineSearch />
+            </div>
             
             <div className="list-items text-center">
             {

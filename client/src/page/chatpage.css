@@ -1,0 +1,62 @@
+
+
+.chat-list{
+    padding:40px;
+    width: 500px;
+    height:auto;
+    background-color: white;
+    margin-left:20px;
+    border-radius: 30px;
+    color:black;
+    
+}
+.chat-card{
+    display: flex;
+    padding:10px;
+    border:solid 1px grey;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    background-color: rgb(196, 196, 196);
+    animation: fadeIn 300ms ease-out backwards;
+    justify-content: space-around;
+    align-items: center;
+}
+.chat-card p {
+    margin-bottom: 0;
+}
+.chat-card:hover{
+    cursor: pointer;
+}
+.chatName{
+    font-weight: 800;
+    margin-right: 10px;
+}
+.user-chat{
+    
+    z-index: 10;
+}
+.user-chat:hover{
+    cursor: pointer;
+}
+.chat-user-list{
+    background-color: white;
+    position: absolute;
+    width: 200px;
+}
+.delete-chat{
+    border:solid 1px red;
+    background-color: transparent;
+    color:red;
+    padding:0 10px;
+    transition: 0.3s;
+}
+.delete-chat:hover{
+    color:white;
+    background-color: red;
+    
+}
+
+.chat-page {
+    display: flex;
+    justify-content: space-around
+}
